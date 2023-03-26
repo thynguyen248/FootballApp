@@ -40,7 +40,7 @@ final class TeamsViewController: UIViewController {
         }
         button.setTitle("APPLY", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .gray
+        button.backgroundColor = .systemIndigo
         button.addTarget(self, action: #selector(didTouchApply), for: .touchUpInside)
         return button
     }()
@@ -162,15 +162,6 @@ extension TeamsViewController: Bindable {
             .receive(on: RunLoop.main)
             .sink { [weak self] error in
                 self?.showAlerWithMessage(error?.localizedDescription ?? "")
-            }
-            .store(in: &cancellables)
-        
-        output.$applyButtonEnabled
-            .dropFirst()
-            .receive(on: RunLoop.main)
-            .sink { [applyButton] isEnabled in
-                applyButton.isEnabled = isEnabled
-                applyButton.backgroundColor = isEnabled ? .systemIndigo : .gray
             }
             .store(in: &cancellables)
     }

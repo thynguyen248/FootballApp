@@ -11,16 +11,7 @@ import UIKit
 import Reachability
 
 final class TeamsViewModel: ViewModelType {
-    //    //Input
-    //    let loadTrigger = PassthroughSubject<Void, Never>()
-    //    let selectedTeams = CurrentValueSubject<[String], Never>([])
-    //
-    //    //Output
     typealias Snapshot = NSDiffableDataSourceSnapshot<TeamsSection, TeamItemViewModel>
-    //    @Published var snapShot = Snapshot()
-    //    @Published var error: AppError?
-    //    @Published var isLoading = false
-    //    @Published var applyButtonEnabled = false
     
     struct Input {
         let loadTrigger: PassthroughSubject<Void, Never>
@@ -31,7 +22,6 @@ final class TeamsViewModel: ViewModelType {
         @Published var snapShot = Snapshot()
         @Published var error: AppError?
         @Published var isLoading = false
-        @Published var applyButtonEnabled = false
     }
     
     private let teamsUseCase: TeamsUseCaseInterface
@@ -92,10 +82,6 @@ final class TeamsViewModel: ViewModelType {
             }
             .filter { $0 != nil }
             .assign(to: &output.$error)
-        
-        input.selectedTeams
-            .map { !$0.isEmpty }
-            .assign(to: &output.$applyButtonEnabled)
         
         return output
     }
