@@ -15,8 +15,6 @@ A demo application is using UIKit + Combine + MVVM architecture
 * What I've learned: should apply this new approach for the applications that targets iOS 13 and above due to a few benefits over using the classic data source.*
 
 ### Demo:
-![ Alt text](demo-gif-1. gif) / ! [](demo-gif-1. gif)
-![ Alt text](demo-gif-2. gif) / ! [](demo-gif-2. gif)
+![](https://github.com/thynguyen248/FootballApp/blob/main/demo-gif-1.gif)
 
-
-
+![](https://github.com/thynguyen248/FootballApp/blob/main/demo-gif-2.gif)
