@@ -25,7 +25,6 @@ final class TeamDetailViewModelTests: XCTestCase {
         let repository = Repository(apiClient: apiClient, dbHandler: dbHandler)
         useCase = TeamDetailUseCase(repository: repository)
         matchesuseCase = MatchesUseCase(repository: repository)
-        matchesuseCase.saveMatches(fakeMatchesData)
         loadTrigger = PassthroughSubject<Void, Never>()
         viewModel = TeamDetailViewModel(teamName: "Team B", teamDetailUseCase: useCase)
         input = TeamDetailViewModel.Input(loadTrigger: loadTrigger)

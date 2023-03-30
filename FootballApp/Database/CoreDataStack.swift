@@ -21,7 +21,6 @@ final class CoreDataStack {
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             self.container.viewContext.automaticallyMergesChangesFromParent = true
             self.container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
-            self.container.viewContext.automaticallyMergesChangesFromParent = true
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
