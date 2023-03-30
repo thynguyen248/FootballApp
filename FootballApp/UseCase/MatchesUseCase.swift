@@ -22,7 +22,7 @@ final class MatchesUseCase: MatchesUseCaseInterface {
     }
     
     func getLocalMatches() -> AnyPublisher<[MatchModel], AppError> {
-        return repository.getLocalMatches()
+        return repository.getLocalMatches(with: nil)
     }
     
     func getRemoteMatches() -> AnyPublisher<[MatchModel], AppError> {

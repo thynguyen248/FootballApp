@@ -52,6 +52,7 @@
 		76B0B8B429CB143B001C6361 /* SectionHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B0B8B329CB143B001C6361 /* SectionHeaderReusableView.swift */; };
 		76B0B8B629CDAF42001C6361 /* Publisher+result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B0B8B529CDAF42001C6361 /* Publisher+result.swift */; };
 		76B0B8B829CEDD00001C6361 /* UINavigationController+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B0B8B729CEDD00001C6361 /* UINavigationController+theme.swift */; };
+		76B6EB3D29D492B10058D355 /* TeamDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B6EB3C29D492B10058D355 /* TeamDetailUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +119,7 @@
 		76B0B8B329CB143B001C6361 /* SectionHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderReusableView.swift; sourceTree = "<group>"; };
 		76B0B8B529CDAF42001C6361 /* Publisher+result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+result.swift"; sourceTree = "<group>"; };
 		76B0B8B729CEDD00001C6361 /* UINavigationController+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+theme.swift"; sourceTree = "<group>"; };
+		76B6EB3C29D492B10058D355 /* TeamDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDetailUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +224,7 @@
 			children = (
 				7630595F29CA9991005371FF /* MatchesUseCase.swift */,
 				76AC1ABE29CF879D00ECC3E6 /* TeamsUseCase.swift */,
+				76B6EB3C29D492B10058D355 /* TeamDetailUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -513,6 +516,7 @@
 				7630596029CA9991005371FF /* MatchesUseCase.swift in Sources */,
 				76AC1ABD29CF851000ECC3E6 /* TeamsSection.swift in Sources */,
 				7630595C29CA8020005371FF /* MatchCollectionViewCell.swift in Sources */,
+				76B6EB3D29D492B10058D355 /* TeamDetailUseCase.swift in Sources */,
 				7630591C29C94915005371FF /* DBHandler.swift in Sources */,
 				76AC1ABF29CF879D00ECC3E6 /* TeamsUseCase.swift in Sources */,
 				76B0B8B829CEDD00001C6361 /* UINavigationController+theme.swift in Sources */,

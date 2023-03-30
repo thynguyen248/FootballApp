@@ -8,7 +8,7 @@
 import CoreData
 import Combine
 
-class CoreDataStack {
+final class CoreDataStack {
     static let shared = CoreDataStack()
     
     private let container: NSPersistentContainer
@@ -89,9 +89,13 @@ extension CoreDataStack {
 }
 
 extension CoreDataStack: DBHandlerInterface {
-    func fetchMatches() -> AnyPublisher<[MatchModel], AppError> {
+    func fetchMatches(with team: String?) -> AnyPublisher<[MatchModel], AppError> {
+        var predicate: NSPredicate?
+        if let team = team {
+            predicate = NSPredicate(format: "home == %@ || away == %@", team)
+        }
         let sortDescriptor = NSSortDescriptor(key: #keyPath(MatchMO.date), ascending: true)
-        return fetch(objectType: MatchMO.self, sortDescriptor: sortDescriptor)
+        return fetch(objectType: MatchMO.self, predicate: predicate, sortDescriptor: sortDescriptor)
             .map { $0.map { $0.matchModel } }
             .eraseToAnyPublisher()
     }

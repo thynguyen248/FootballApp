@@ -9,7 +9,7 @@ import Combine
 import CoreData
 
 protocol RepositoryInterface {
-    func getLocalMatches() -> AnyPublisher<[MatchModel], AppError>
+    func getLocalMatches(with team: String?) -> AnyPublisher<[MatchModel], AppError>
     func getRemoteMatches() -> AnyPublisher<[MatchModel], AppError>
     @discardableResult
     func saveMatches(_ matches: [MatchModel]) -> AnyPublisher<[MatchModel], AppError>
@@ -30,8 +30,8 @@ final class Repository: RepositoryInterface {
         self.dbHandler = dbHandler
     }
     
-    func getLocalMatches() -> AnyPublisher<[MatchModel], AppError> {
-        return dbHandler.fetchMatches()
+    func getLocalMatches(with team: String?) -> AnyPublisher<[MatchModel], AppError> {
+        return dbHandler.fetchMatches(with: team)
     }
     
     func getRemoteMatches() -> AnyPublisher<[MatchModel], AppError> {

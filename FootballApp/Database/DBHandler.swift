@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 protocol DBHandlerInterface {
-    func fetchMatches() -> AnyPublisher<[MatchModel], AppError>
+    func fetchMatches(with team: String?) -> AnyPublisher<[MatchModel], AppError>
     @discardableResult
     func saveMatches(_ matches: [MatchModel]) -> AnyPublisher<[MatchModel], AppError>
     func fetchTeams() -> AnyPublisher<[TeamModel], AppError>
