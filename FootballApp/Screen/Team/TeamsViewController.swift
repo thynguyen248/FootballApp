@@ -7,15 +7,18 @@
 
 import UIKit
 import Combine
+import Reachability
 
 final class TeamsViewController: UIViewController {
     private let loadTrigger = PassthroughSubject<Void, Never>()
     private let selectedTeams = CurrentValueSubject<[String], Never>([])
+    private var isReachable = PassthroughSubject<Bool, Never>()
     
     typealias DataSource = UITableViewDiffableDataSource<TeamsSection, TeamItemViewModel>
     private lazy var dataSource = makeDataSource()
     private var cancellables: Set<AnyCancellable> = []
 
+    private let reachability = try! Reachability()
     var viewModel: TeamsViewModel
     weak var delegate: TeamsViewControllerDelegate?
     
@@ -138,7 +141,14 @@ final class TeamsViewController: UIViewController {
 // MARK: - Bindable
 extension TeamsViewController: Bindable {
     func bindViewModel() {
-        let input = TeamsViewModel.Input(loadTrigger: loadTrigger, selectedTeams: selectedTeams)
+        reachability.isReachable
+            .removeDuplicates()
+            .sink { [isReachable] reachable in
+                isReachable.send(reachable)
+            }
+            .store(in: &cancellables)
+        
+        let input = TeamsViewModel.Input(loadTrigger: loadTrigger, selectedTeams: selectedTeams, isReachable: isReachable)
         let output = viewModel.transform(input: input)
         
         output.$isLoading

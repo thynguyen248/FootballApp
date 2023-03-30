@@ -190,6 +190,7 @@ final class MatchesViewController: UIViewController {
 extension MatchesViewController: Bindable {
     func bindViewModel() {
         reachability.isReachable
+            .removeDuplicates()
             .sink { [isReachable] reachable in
                 isReachable.send(reachable)
             }

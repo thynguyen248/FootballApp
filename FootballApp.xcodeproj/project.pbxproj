@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		76078B6429D5460D00CBF06B /* APIClientMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76078B6329D5460D00CBF06B /* APIClientMock.swift */; };
+		76078B6C29D57FBD00CBF06B /* TeamsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76078B6B29D57FBD00CBF06B /* TeamsViewModelTests.swift */; };
 		763058C929C931EF005371FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763058C829C931EF005371FF /* AppDelegate.swift */; };
 		763058CB29C931EF005371FF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763058CA29C931EF005371FF /* SceneDelegate.swift */; };
 		763058D329C931EF005371FF /* FootballApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 763058D129C931EF005371FF /* FootballApp.xcdatamodeld */; };
@@ -75,6 +76,7 @@
 
 /* Begin PBXFileReference section */
 		76078B6329D5460D00CBF06B /* APIClientMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientMock.swift; sourceTree = "<group>"; };
+		76078B6B29D57FBD00CBF06B /* TeamsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamsViewModelTests.swift; sourceTree = "<group>"; };
 		763058C529C931EF005371FF /* FootballApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FootballApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		763058C829C931EF005371FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		763058CA29C931EF005371FF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -152,6 +154,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		76078B6A29D57FA000CBF06B /* Teams */ = {
+			isa = PBXGroup;
+			children = (
+				76078B6B29D57FBD00CBF06B /* TeamsViewModelTests.swift */,
+			);
+			path = Teams;
+			sourceTree = "<group>";
+		};
 		763058BC29C931EF005371FF = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +207,7 @@
 		763058E129C931F7005371FF /* FootballAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				76078B6A29D57FA000CBF06B /* Teams */,
 				76B6EB4029D53D720058D355 /* Matches */,
 				76078B6329D5460D00CBF06B /* APIClientMock.swift */,
 			);
@@ -552,6 +563,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				76B6EB3F29D53D6D0058D355 /* MatchesViewModelTest.swift in Sources */,
+				76078B6C29D57FBD00CBF06B /* TeamsViewModelTests.swift in Sources */,
 				76078B6429D5460D00CBF06B /* APIClientMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

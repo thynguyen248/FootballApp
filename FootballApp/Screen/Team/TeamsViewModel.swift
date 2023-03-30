@@ -16,6 +16,7 @@ final class TeamsViewModel: ViewModelType {
     struct Input {
         let loadTrigger: PassthroughSubject<Void, Never>
         let selectedTeams: CurrentValueSubject<[String], Never>
+        let isReachable: PassthroughSubject<Bool, Never>
     }
     
     final class Output {
@@ -38,7 +39,7 @@ final class TeamsViewModel: ViewModelType {
     
     func transform(input: Input) -> Output {
         let output = Output()
-        let teamsResultPublisher = Publishers.CombineLatest(reachability.isReachable.removeDuplicates(),
+        let teamsResultPublisher = Publishers.CombineLatest(input.isReachable,
                                                             input.loadTrigger)
             .flatMap { [teamsUseCase] (isReachable, _) in
                 if isReachable {
