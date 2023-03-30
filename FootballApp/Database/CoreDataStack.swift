@@ -92,7 +92,9 @@ extension CoreDataStack: DBHandlerInterface {
     func fetchMatches(with team: String?) -> AnyPublisher<[MatchModel], AppError> {
         var predicate: NSPredicate?
         if let team = team {
-            predicate = NSPredicate(format: "home == %@ || away == %@", team)
+            let predicate1 = NSPredicate(format: "home == %@", team)
+            let predicate2 = NSPredicate(format: "away == %@", team)
+            predicate = NSCompoundPredicate.init(type: .or, subpredicates: [predicate1,predicate2])
         }
         let sortDescriptor = NSSortDescriptor(key: #keyPath(MatchMO.date), ascending: true)
         return fetch(objectType: MatchMO.self, predicate: predicate, sortDescriptor: sortDescriptor)

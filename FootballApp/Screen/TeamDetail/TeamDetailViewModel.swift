@@ -6,9 +6,12 @@
 //
 
 import Foundation
+import Combine
 
 final class TeamDetailViewModel: ViewModelType {
-    struct Input {}
+    struct Input {
+        let loadTrigger: PassthroughSubject<Void, Never>
+    }
     
     final class Output {
         @Published var title: String?
@@ -31,8 +34,12 @@ final class TeamDetailViewModel: ViewModelType {
         
         output.title = teamName
         
-        let totalMatchesResultPublisher = teamDetailUseCase.getMatches(with: teamName)
-            .asResult()
+        let totalMatchesResultPublisher =
+        input.loadTrigger
+            .flatMap { [teamName, teamDetailUseCase] in
+                teamDetailUseCase.getMatches(with: teamName)
+                    .asResult()
+            }
             .receive(on: DispatchQueue.main)
             .share()
             .eraseToAnyPublisher()

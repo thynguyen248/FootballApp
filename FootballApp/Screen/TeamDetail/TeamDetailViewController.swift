@@ -9,6 +9,8 @@ import UIKit
 import Combine
 
 final class TeamDetailViewController: UIViewController {
+    private let loadTrigger = PassthroughSubject<Void, Never>()
+    
     private lazy var containerStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .vertical
@@ -71,6 +73,7 @@ final class TeamDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        loadData()
     }
     
     private func setupUI() {
@@ -80,12 +83,16 @@ final class TeamDetailViewController: UIViewController {
             make.bottom.lessThanOrEqualTo(view.safeAreaLayoutGuide)
         }
     }
+    
+    private func loadData() {
+        loadTrigger.send(())
+    }
 }
 
 // MARK: - Bindable
 extension TeamDetailViewController: Bindable {
     func bindViewModel() {
-        let input = TeamDetailViewModel.Input()
+        let input = TeamDetailViewModel.Input(loadTrigger: loadTrigger)
         let output = viewModel.transform(input: input)
         
         output.$title
