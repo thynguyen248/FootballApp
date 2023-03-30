@@ -18,6 +18,11 @@ extension Date {
         formatter.dateFormat = format
         return formatter.string(from: self)
     }
+    
+    func addDays(numberOfDays: Int) -> Date {
+        let endDate = Calendar.current.date(byAdding: .day, value: numberOfDays, to: self)
+        return endDate ?? Date()
+    }
 }
 
 extension String {

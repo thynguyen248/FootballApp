@@ -8,7 +8,6 @@
 import Foundation
 import Combine
 import UIKit
-import Reachability
 
 final class MatchesViewModel: ViewModelType {
     typealias Snapshot = NSDiffableDataSourceSnapshot<MatchesSection, MatchItemViewModel>
@@ -16,6 +15,7 @@ final class MatchesViewModel: ViewModelType {
     struct Input {
         let loadTrigger: PassthroughSubject<Void, Never>
         let selectedTeams: CurrentValueSubject<[String], Never>
+        let isReachable: PassthroughSubject<Bool, Never>
     }
 
     final class Output {
@@ -25,21 +25,15 @@ final class MatchesViewModel: ViewModelType {
     }
     
     private let matchesUseCase: MatchesUseCaseInterface
-    private let reachability = try! Reachability()
     
     init(matchesUseCase: MatchesUseCaseInterface = MatchesUseCase()) {
         self.matchesUseCase = matchesUseCase
-        do {
-            try reachability.startNotifier()
-        } catch {
-            print("Unable to start notifier")
-        }
     }
     
     func transform(input: Input) -> Output {
         let output = Output()
         
-        let matchesResultPublisher = Publishers.CombineLatest(reachability.isReachable.removeDuplicates(),
+        let matchesResultPublisher = Publishers.CombineLatest(input.isReachable,
                                                               input.loadTrigger)
             .flatMap { [matchesUseCase] (isReachable, _) in
                 if isReachable {

@@ -15,20 +15,6 @@ enum HTTPMethod: String {
     case delete = "DELETE"
 }
 
-//enum NetworkRequestError: AppError {
-//    case invalidRequest
-//    case badRequest
-//    case unauthorized
-//    case forbidden
-//    case notFound
-//    case error4xx(_ code: Int)
-//    case serverError
-//    case error5xx(_ code: Int)
-//    case decodingError(_ message: String)
-//    case urlSessionFailed(_ error: URLError)
-//    case unknownError
-//}
-
 protocol Request {
     var baseURL: String { get }
     var path: String { get }
@@ -133,3 +119,10 @@ final class APIClient {
         }
     }
 }
+
+protocol APIClientInterface {
+    func getMatches() -> AnyPublisher<[MatchModel], AppError>
+    func getTeams() -> AnyPublisher<[TeamModel], AppError>
+}
+
+extension APIClient: APIClientInterface {}

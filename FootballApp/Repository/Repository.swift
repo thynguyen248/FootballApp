@@ -21,10 +21,10 @@ protocol RepositoryInterface {
 }
 
 final class Repository: RepositoryInterface {
-    private let apiClient: APIClient
+    private let apiClient: APIClientInterface
     private let dbHandler: DBHandlerInterface
     
-    init(apiClient: APIClient = APIClient(),
+    init(apiClient: APIClientInterface = APIClient(),
          dbHandler: DBHandlerInterface = CoreDataStack.shared) {
         self.apiClient = apiClient
         self.dbHandler = dbHandler

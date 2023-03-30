@@ -9,15 +9,18 @@ import UIKit
 import SnapKit
 import Combine
 import AVKit
+import Reachability
 
 final class MatchesViewController: UIViewController {
     private let loadTrigger = PassthroughSubject<Void, Never>()
     private let selectedTeams = CurrentValueSubject<[String], Never>([])
+    private var isReachable = PassthroughSubject<Bool, Never>()
     
     typealias DataSource = UICollectionViewDiffableDataSource<MatchesSection, MatchItemViewModel>
     private lazy var dataSource = makeDataSource()
     private var cancellables: Set<AnyCancellable> = []
     
+    private let reachability = try! Reachability()
     var viewModel: MatchesViewModel
     
     // MARK: - UI properties
@@ -91,6 +94,12 @@ final class MatchesViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         loadData()
+        
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start notifier")
+        }
     }
     
     // MARK: - UI setup
@@ -180,7 +189,13 @@ final class MatchesViewController: UIViewController {
 // MARK: - Bindable
 extension MatchesViewController: Bindable {
     func bindViewModel() {
-        let input = MatchesViewModel.Input(loadTrigger: loadTrigger, selectedTeams: selectedTeams)
+        reachability.isReachable
+            .sink { [isReachable] reachable in
+                isReachable.send(reachable)
+            }
+            .store(in: &cancellables)
+        
+        let input = MatchesViewModel.Input(loadTrigger: loadTrigger, selectedTeams: selectedTeams, isReachable: isReachable)
         let output = viewModel.transform(input: input)
         
         output.$isLoading
