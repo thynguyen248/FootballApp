@@ -14,7 +14,8 @@ final class TeamDetailViewModel: ViewModelType {
     }
     
     final class Output {
-        @Published var title: String?
+        @Published var teamName: String?
+        @Published var teamLogoUrl: URL?
         @Published var totalInfo: String?
         @Published var previousInfo: String?
         @Published var upcomingInfo: String?
@@ -22,17 +23,24 @@ final class TeamDetailViewModel: ViewModelType {
     
     private let teamDetailUseCase: TeamDetailUseCaseInterface
     private let teamName: String?
+    private let teamLogo: String?
     
     init(teamName: String?,
+         teamLogo: String?,
         teamDetailUseCase: TeamDetailUseCaseInterface = TeamDetailUseCase()) {
         self.teamName = teamName
+        self.teamLogo = teamLogo
         self.teamDetailUseCase = teamDetailUseCase
     }
     
     func transform(input: Input) -> Output {
         let output = Output()
         
-        output.title = teamName
+        output.teamName = teamName
+        
+        if let teamLogo = teamLogo {
+            output.teamLogoUrl = URL(string: teamLogo)
+        }
         
         let totalMatchesResultPublisher =
         input.loadTrigger

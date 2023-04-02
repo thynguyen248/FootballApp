@@ -7,9 +7,21 @@
 
 import UIKit
 import Combine
+import Kingfisher
 
 final class TeamDetailViewController: UIViewController {
     private let loadTrigger = PassthroughSubject<Void, Never>()
+    
+    private lazy var logo: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.snp.makeConstraints { make in
+            make.size.equalTo(50)
+        }
+        imageView.layer.cornerRadius = 5
+        imageView.clipsToBounds = true
+        return imageView
+    }()
     
     private lazy var containerStackView: UIStackView = {
         let view = UIStackView()
@@ -77,9 +89,14 @@ final class TeamDetailViewController: UIViewController {
     }
     
     private func setupUI() {
+        view.addSubview(logo)
         view.addSubview(containerStackView)
+        logo.snp.makeConstraints { make in
+            make.leading.top.equalTo(view.safeAreaLayoutGuide).offset(16)
+        }
         containerStackView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            make.top.trailing.equalTo(view.safeAreaLayoutGuide)
+            make.leading.equalTo(logo.snp.trailing)
             make.bottom.lessThanOrEqualTo(view.safeAreaLayoutGuide)
         }
     }
@@ -95,7 +112,14 @@ extension TeamDetailViewController: Bindable {
         let input = TeamDetailViewModel.Input(loadTrigger: loadTrigger)
         let output = viewModel.transform(input: input)
         
-        output.$title
+        output.$teamLogoUrl
+            .receive(on: RunLoop.main)
+            .sink { [logo] teamLogoUrl in
+                logo.kf.setImage(with: teamLogoUrl)
+            }
+            .store(in: &cancellables)
+        
+        output.$teamName
             .receive(on: RunLoop.main)
             .sink { [nameLabel] title in
                 nameLabel.text = title

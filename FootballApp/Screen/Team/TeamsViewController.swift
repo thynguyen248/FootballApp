@@ -132,7 +132,7 @@ final class TeamsViewController: UIViewController {
     }
     
     private func showTeamDetailScreen(with item: TeamItemViewModel) {
-        let viewModel = TeamDetailViewModel(teamName: item.name)
+        let viewModel = TeamDetailViewModel(teamName: item.name, teamLogo: item.logo)
         let viewController = TeamDetailViewController(viewModel: viewModel)
         navigationController?.pushViewController(viewController, animated: true)
     }
